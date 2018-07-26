@@ -23,3 +23,34 @@ The Sustainable Agroecosystems group at ETH relies on Diffuse Reflectance Fourie
 
 Reading spectrometer data into the R environment
 ------------------------------------------------
+
+``` r
+# Load collection of packages that work together seamlessly for efficient
+# analysis workflows
+library("tidyverse")
+```
+
+    ## ── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+
+    ## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
+    ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
+    ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
+    ## ✔ readr   1.1.1     ✔ forcats 0.3.0
+
+    ## ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+
+``` r
+# Package that facilitates spectral data handling, processing and modeling
+library("simplerspec")
+```
+
+    ## Loading required package: foreach
+
+    ## 
+    ## Attaching package: 'foreach'
+
+    ## The following objects are masked from 'package:purrr':
+    ## 
+    ##     accumulate, when

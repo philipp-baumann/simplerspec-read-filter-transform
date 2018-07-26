@@ -36,5 +36,14 @@ single *OPUS* file is produced.
 
 ## Reading spectrometer data into the R environment
 
+```{r}
+# Load collection of packages that work together seamlessly for efficient
+# analysis workflows
+library("tidyverse")
+# Package that facilitates spectral data handling, processing and modeling
+library("simplerspec")
+```
+
+
 
 
