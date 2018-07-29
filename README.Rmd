@@ -66,11 +66,11 @@ When you have spectra of various different spectral data sets or that cover
 separate experiments and/or different locations and times, you might prefer to
 organize your spectra as sub-folders within `data/spectra`. This hands-on will
 be based spectral data that have been used to build and evaluate the YAMSYS
-spectroscopy reference models. Besides these reference spectra measured with  a
+spectroscopy reference models. Besides these reference spectra measured witha
 Bruker ALPHA mid-IR spectrometer at the Sustainable Agroecosystems group at ETH
 Zürich, there are other spectra that have been acquired to test different
-questions such as spectrometer cross-comparisons. Therefore, YAMSYS reference
-spectra are contained within a separate path `data/spectra/soilspec_eth_bin`.
+questions such as spectrometer cross-comparisons. Therefore, other comparison
+spectra are in separate paths, e.g.  `data/spectra/soilspec_eth_bin`.
 
 In Figure \ref{spectra_files} you can see file explorer screenshot showing
 *OPUS* files of three replicate scans for each of the first three reference soil
@@ -86,7 +86,7 @@ object `files`:
 
 ```{r}
 # Extract data from OPUS binary files; list of file paths
-files <- list.files("data/spectra/soilspec_eth_bin", full.names = TRUE)
+files <- list.files("data/spectra", full.names = TRUE)
 ```
 
 Note that you need to set the `full.names` argument to `TRUE` (default is
@@ -94,8 +94,7 @@ Note that you need to set the `full.names` argument to `TRUE` (default is
 directory, otherwise R will not be able to find the files when using the
 universal `simplerspec` *OPUS* reader. 
 
-You can compactly display the internal structure of the `files` object using
-`str()̀.
+You can compactly display the internal structure of the `files` object:
 
 ```{r}
 str(files)
@@ -135,6 +134,8 @@ head(files[-c(1:3)], n = 5L) # show only first 5 values
 # The first three elements of the character vector are removed
 ```
 
+## Spectral measurement data
+
 Bruker FTIR spectrometers produce binary files in the OPUS format that can
 contain different types of spectra and many parameters such as instrument type
 and settings that were used at the time of data acquisition and internal
@@ -159,6 +160,15 @@ for free. However, Bruker only provides a Windows version and the free version
 is limited to visualize only final spectra. The remaining spectral blocks can be
 checked choosing the menu *Window* > *New Report Window* and opening *OPUS* by
 the menu *File* > *Load File*.
+
+# Session info
+
+```{r}
+sessionInfo()
+```
+
+
+
 
 
 
