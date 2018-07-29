@@ -62,15 +62,15 @@ to organize your spectroscopy-related research projects.
 ![Recommended directory structure for spectroscopy modeling projects
 \label{project_structure}](figures/project_folder_structure.png){width=70%}
 
-When you have spectra of various different spectral data sets or that cover
-separate experiments and/or different locations and times, you might prefer to
-organize your spectra as sub-folders within `data/spectra`. This hands-on will
-be based spectral data that have been used to build and evaluate the YAMSYS
-spectroscopy reference models. Besides these reference spectra measured witha
-Bruker ALPHA mid-IR spectrometer at the Sustainable Agroecosystems group at ETH
-Zürich, there are other spectra that have been acquired to test different
-questions such as spectrometer cross-comparisons. Therefore, other comparison
-spectra are in separate paths, e.g.  `data/spectra/soilspec_eth_bin`.
+When you have spectra that cover separate experiments and/or different locations
+and times, you might prefer to organize your spectra as sub-folders within
+`data/spectra`. This hands-on will be based on spectral data that were used 
+to build and evaluate the YAMSYS spectroscopy reference models. Besides these
+reference spectra measured with a Bruker ALPHA mid-IR spectrometer at the 
+Sustainable Agroecosystems group at ETH Zürich, there are other spectra that
+have been acquired to test different questions such as spectrometer
+cross-comparisons. Therefore, other comparison spectra are in separate paths,
+e.g.  `data/spectra/soilspec_eth_bin`.
 
 In Figure \ref{spectra_files} you can see file explorer screenshot showing
 *OPUS* files of three replicate scans for each of the first three reference soil

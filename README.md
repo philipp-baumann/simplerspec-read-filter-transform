@@ -32,14 +32,26 @@ First, we load the set of packages of `tidyverse` (see [**here**](http://tidyver
 library("tidyverse")
 ```
 
-    ## ── Attaching packages ──────────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ───────────────────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
     ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
     ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
     ## ✔ readr   1.1.1     ✔ forcats 0.3.0
 
-    ## ── Conflicts ─────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## Warning: package 'ggplot2' was built under R version 3.4.4
+
+    ## Warning: package 'tibble' was built under R version 3.4.3
+
+    ## Warning: package 'tidyr' was built under R version 3.4.4
+
+    ## Warning: package 'purrr' was built under R version 3.4.4
+
+    ## Warning: package 'dplyr' was built under R version 3.4.4
+
+    ## Warning: package 'stringr' was built under R version 3.4.4
+
+    ## ── Conflicts ──────────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -49,6 +61,8 @@ library("simplerspec")
 ```
 
     ## Loading required package: foreach
+
+    ## Warning: package 'foreach' was built under R version 3.4.3
 
     ## 
     ## Attaching package: 'foreach'
@@ -61,7 +75,7 @@ I recommended that you set up a self-contained directory where all R scripts, da
 
 <img src="figures/project_folder_structure.png" alt="Recommended directory structure for spectroscopy modeling projects " style="width:70.0%" />
 
-When you have spectra of various different spectral data sets or that cover separate experiments and/or different locations and times, you might prefer to organize your spectra as sub-folders within `data/spectra`. This hands-on will be based spectral data that have been used to build and evaluate the YAMSYS spectroscopy reference models. Besides these reference spectra measured witha Bruker ALPHA mid-IR spectrometer at the Sustainable Agroecosystems group at ETH Zürich, there are other spectra that have been acquired to test different questions such as spectrometer cross-comparisons. Therefore, other comparison spectra are in separate paths, e.g. `data/spectra/soilspec_eth_bin`.
+When you have spectra that cover separate experiments and/or different locations and times, you might prefer to organize your spectra as sub-folders within `data/spectra`. This hands-on will be based on spectral data that were used to build and evaluate the YAMSYS spectroscopy reference models. Besides these reference spectra measured with a Bruker ALPHA mid-IR spectrometer at the Sustainable Agroecosystems group at ETH Zürich, there are other spectra that have been acquired to test different questions such as spectrometer cross-comparisons. Therefore, other comparison spectra are in separate paths, e.g. `data/spectra/soilspec_eth_bin`.
 
 In Figure you can see file explorer screenshot showing *OPUS* files of three replicate scans for each of the first three reference soil samples. *OPUS* have the extension `.n` where `n` represents an integer of repeated sample measurements starting from 0.
 
@@ -147,21 +161,16 @@ Session info
 sessionInfo()
 ```
 
-    ## R version 3.4.4 (2018-03-15)
-    ## Platform: x86_64-pc-linux-gnu (64-bit)
-    ## Running under: KDE neon User Edition 5.13
+    ## R version 3.4.2 (2017-09-28)
+    ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+    ## Running under: OS X El Capitan 10.11.3
     ## 
     ## Matrix products: default
-    ## BLAS: /usr/lib/libblas/libblas.so.3.6.0
-    ## LAPACK: /usr/lib/lapack/liblapack.so.3.6.0
+    ## BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
     ## 
     ## locale:
-    ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-    ##  [3] LC_TIME=de_CH.UTF-8        LC_COLLATE=en_US.UTF-8    
-    ##  [5] LC_MONETARY=de_CH.UTF-8    LC_MESSAGES=en_US.UTF-8   
-    ##  [7] LC_PAPER=de_CH.UTF-8       LC_NAME=C                 
-    ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-    ## [11] LC_MEASUREMENT=de_CH.UTF-8 LC_IDENTIFICATION=C       
+    ## [1] de_CH.UTF-8/de_CH.UTF-8/de_CH.UTF-8/C/de_CH.UTF-8/de_CH.UTF-8
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -175,19 +184,19 @@ sessionInfo()
     ## loaded via a namespace (and not attached):
     ##  [1] tidyselect_0.2.4  reshape2_1.4.3    haven_1.1.1      
     ##  [4] lattice_0.20-35   colorspace_1.3-2  htmltools_0.3.6  
-    ##  [7] yaml_2.1.19       rlang_0.2.1       pillar_1.2.2     
-    ## [10] foreign_0.8-70    glue_1.2.0        withr_2.1.2      
-    ## [13] modelr_0.1.2      readxl_1.1.0      bindrcpp_0.2.2   
+    ##  [7] yaml_2.1.16       rlang_0.2.1       pillar_1.1.0     
+    ## [10] foreign_0.8-69    glue_1.2.0        withr_2.1.2      
+    ## [13] modelr_0.1.2      readxl_1.0.0      bindrcpp_0.2.2   
     ## [16] bindr_0.1.1       plyr_1.8.4        munsell_0.4.3    
     ## [19] gtable_0.2.0      cellranger_1.1.0  rvest_0.3.2      
-    ## [22] codetools_0.2-15  psych_1.8.3.3     evaluate_0.10.1  
-    ## [25] knitr_1.20        parallel_3.4.4    broom_0.4.4      
+    ## [22] codetools_0.2-15  psych_1.8.4       evaluate_0.10.1  
+    ## [25] knitr_1.19        parallel_3.4.2    broom_0.4.5      
     ## [28] Rcpp_0.12.17      scales_0.5.0      backports_1.1.2  
-    ## [31] jsonlite_1.5      mnormt_1.5-5      hms_0.4.2        
-    ## [34] digest_0.6.15     stringi_1.2.2     grid_3.4.4       
-    ## [37] rprojroot_1.3-2   cli_1.0.0         tools_3.4.4      
+    ## [31] jsonlite_1.5      mnormt_1.5-5      hms_0.4.1        
+    ## [34] digest_0.6.15     stringi_1.2.3     grid_3.4.2       
+    ## [37] rprojroot_1.3-2   cli_1.0.0         tools_3.4.2      
     ## [40] magrittr_1.5      lazyeval_0.2.1    crayon_1.3.4     
     ## [43] pkgconfig_2.0.1   data.table_1.11.4 xml2_1.2.0       
-    ## [46] lubridate_1.7.4   assertthat_0.2.0  rmarkdown_1.9    
+    ## [46] lubridate_1.7.4   assertthat_0.2.0  rmarkdown_1.8    
     ## [49] httr_1.3.1        rstudioapi_0.7    iterators_1.0.9  
-    ## [52] R6_2.2.2          nlme_3.1-137      compiler_3.4.4
+    ## [52] R6_2.2.2          nlme_3.1-131.1    compiler_3.4.2
