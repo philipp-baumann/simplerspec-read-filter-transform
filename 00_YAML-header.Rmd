@@ -1,0 +1,24 @@
+---
+title: "YAML header"
+author: "Philipp Baumann"
+date: "July 25, 2018"
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+  html_notebook:
+    fig_caption: yes
+    number_sections: yes
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+---
+
+```{r global_options, include=FALSE}
+# Place figure "here"
+# force knitr to write LaTeX code for figures and use fig.pos
+# with out.extra = ''
+knitr::opts_chunk$set(fig.pos = 'h!', out.extra = '')
+```
+
+Example YAML header to compile to pdf, html notebook and html document.
