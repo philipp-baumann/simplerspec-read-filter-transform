@@ -32,7 +32,7 @@ First, we load the set of packages of `tidyverse` (see [**here**](http://tidyver
 library("tidyverse")
 ```
 
-    ## ── Attaching packages ───────────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
     ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
@@ -51,7 +51,7 @@ library("tidyverse")
 
     ## Warning: package 'stringr' was built under R version 3.4.4
 
-    ## ── Conflicts ──────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -75,9 +75,9 @@ I recommended that you set up a self-contained directory where all R scripts, da
 
 <img src="figures/project_folder_structure.png" alt="Recommended directory structure for spectroscopy modeling projects " style="width:70.0%" />
 
-When you have spectra that cover separate experiments and/or different locations and times, you might prefer to organize your spectra as sub-folders within `data/spectra`. This hands-on will be based on spectral data that were used to build and evaluate the YAMSYS spectroscopy reference models. Besides these reference spectra measured with a Bruker ALPHA mid-IR spectrometer at the Sustainable Agroecosystems group at ETH Zürich, there are other spectra that have been acquired to test different questions such as spectrometer cross-comparisons. Therefore, other comparison spectra are in separate paths, e.g. `data/spectra/soilspec_eth_bin`.
+When you have spectra that cover separate experiments and/or different locations and times, you might prefer to organize your spectra as sub-folders within `data/spectra`. This hands-on is based on spectral data that were used to build and evaluate the YAMSYS spectroscopy reference models. Besides these reference spectra measured with a Bruker ALPHA mid-IR spectrometer at the Sustainable Agroecosystems group at ETH Zürich, there are other spectra that have been acquired to test different questions such as spectrometer cross-comparisons. Therefore, other comparison spectra are in separate paths, e.g. `data/spectra/soilspec_eth_bin`.
 
-In Figure you can see file explorer screenshot showing *OPUS* files of three replicate scans for each of the first three reference soil samples. *OPUS* have the extension `.n` where `n` represents an integer of repeated sample measurements starting from 0.
+In the Figure below you can see a file explorer screenshot showing *OPUS* files of three replicate scans for each of the first three reference soil samples. *OPUS* have the extension `.n` where `n` represents an integer of repeated sample measurements starting from 0.
 
 <img src="figures/spectra_files_to_read.png" alt="Screenshot showing replicate scans of first three samples reading example. " width="400" />
 
@@ -98,7 +98,7 @@ str(files)
 
     ##  chr [1:284] "data/spectra/BF_lo_01_soil_cal.0" ...
 
-The object `files` has the data structure *atomic vector*. An *atomic vectors* have six possible basic (*atomic*) vector types. These are *logical*, *integer*, *real*, *complex*, *string* (or *character*) and *raw*. Vector types can be returned by the R base function `typeof(x)`, which returns the type or internal storage mode an object `x`. For the `files` object it is
+The object `files` has the data structure *atomic vector*. *Atomic vectors* have six possible basic (*atomic*) vector types. These are *logical*, *integer*, *real*, *complex*, *string* (or *character*) and *raw*. Vector types can be returned by the R base function `typeof(x)`, which returns the type or internal storage mode an object `x`. For the `files` object it is
 
 ``` r
 # Check type of files object
