@@ -2,7 +2,15 @@
 title: "Read, filter and transform spectra and metadata"
 author: "Philipp Baumann // philipp.baumann@usys.ethz.ch"
 date: "July 25, 2018"
-output: rmarkdown::github_document
+output:
+  html_document:
+    df_print: paged
+  html_notebook:
+    fig_caption: yes
+    number_sections: yes
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -10,6 +18,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ---
+
+For a html version of this tutorial, see [**here**](). You can also download a pdf.
 
 # Topics and goals of this section
 
