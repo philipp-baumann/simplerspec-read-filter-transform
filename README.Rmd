@@ -161,6 +161,43 @@ is limited to visualize only final spectra. The remaining spectral blocks can be
 checked choosing the menu *Window* > *New Report Window* and opening *OPUS* by
 the menu *File* > *Load File*.
 
+The types of spectra and associated data parameters that are saved after a
+single measurement depend on the options that are selected in the *OPUS*
+software. For data acquisition, the values under the tab *Advanced* of the
+*Setup Measurement Parameters* menu window in the *OPUS* software.
+
+Depending on the standard of a binary file, different regions in a file can be
+interpreted differently by a program. For example, some information at some
+block positions need to be interpreted as a certain type of number
+representation whereas others are text. Hence, the interpretation of different
+bit positions in the file requires either a priori knowledge provided by some
+file specifications or extensive reverse-engineering.
+
+Instead of sharing the full binary file specification, Bruker ships the *OPUS*
+macro programming language or Microsoft Visual Basic scripts for automated data
+acquisition and processing. However, this approaches are very inflexible and not
+transparent, and therefore not reproducible. Hence, the idea of implementing
+a file reader that is integrated in the R statistical programming environment
+was targeted first in the `soil.spec` R package created by Andrew Sila (ICRAF,
+Nairobi), Tomislav Hengl (ISRIC -- World Soil Information) and Thomas
+Terhoeven-Urselmans (former member of ICRAF, Nairobi). `soil.spec` was created
+based on the African Soil Information Services (AfSIS) project (see [here for
+more information](http://africasoils.net/)). Because this reader worked only
+when applying a restricted set of settings and procedures in OPUS, the idea came
+up to modify and extend the previously mentioned `soil.spec::read.opus()`
+function. This restriction is mainly due to the fact that positions where
+spectra occur are not fixed and there is no evident accessible information about
+the sequence of spectra and data parameters and the type of present spectra.
+Therefore, I have been working extensively on a universal Bruker OPUS format
+file reader that can correctly assign and read out different spectra types from
+any type of Bruker FTIR spectrometer with different blocks saved and with and
+without atmospheric compensation.
+
+Simplerspec comes with reader function written in R, that is intended to be a
+universal Bruker OPUS file reader that extract spectra and key metadata from
+files. Usually, one is mostly interested to extract the final absorbance spectra
+(shown as `AB` in the *OPUS viewer* software).
+
 # Session info
 
 ```{r}
