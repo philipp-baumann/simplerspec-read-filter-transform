@@ -3,12 +3,12 @@ title: "Read, filter and transform spectra and metadata"
 author: "Philipp Baumann // philipp.baumann@usys.ethz.ch"
 date: "July 25, 2018"
 output:
-  github_document:
-    toc: true
-    toc_depth: 2
   html_document:
     fig_caption: yes
     number_sections: yes
+    toc: true
+    toc_depth: 2
+  github_document:
     toc: true
     toc_depth: 2
   html_notebook:
