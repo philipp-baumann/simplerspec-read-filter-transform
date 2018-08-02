@@ -18,14 +18,22 @@ For a html version of this tutorial, see [**here**](). You can also download a p
 
 # Getting started  
 
-Requirements prior starting this tutorial
+## Prerequisites
 
-* I assume you are familiar with 
+* First, you need to be familar how to work into R.
+  [Here](https://github.com/philipp-baumann/simplerspec-teaching/blob/master/00_R-basics-spectro.md) 
+  I give some recommendations to start mastering spectroscopy analysis taks.
+* You need to need to now that there are R basic data structures used for 
+  analysis. Have a first read [here](http://adv-r.had.co.nz/Data-structures.html)
+  in the *Advanced R* book of Hadley Wickham. 
 
 ## Topics and goals of this section
 
 * You will learn how to use different R base data structures and basic
   operations such as subsetting to explore and transform spectral data.
+  
+* This hands-on tutorial teaches you the technical skills how to work with data
+  structures in R by the example of manipulating spectral data.
   
 ## How to interactively go throught the tutorial
 
@@ -33,8 +41,8 @@ Requirements prior starting this tutorial
 repository from github to your computer.
 2. Unzip the folder
 3. Double-click the `.RProj` file and the tutorial is loaded as R project
-   (no need to use `set.wd()` other other nasty hard-coded scripts to set
-   the working directory)
+   (no need to use `setwd()` and `yourverylonganduniquedirectoryonyourpc` or
+   other nasty hard-coded approaches to set the working directory)
 4. For working with this R markdown notebooks for reproducible and interactive
    analysis, see [here](https://rmarkdown.rstudio.com/index.html)
 5. Have fun reproducing
