@@ -18,7 +18,7 @@ July 25, 2018
 
 ------------------------------------------------------------------------
 
-For a html version of this tutorial, see [**here**](). You can also download a pdf.
+For a html version of this tutorial, see [**here**](). You can also [download this tutorial as pdf]().
 
 Getting started
 ===============
@@ -26,7 +26,7 @@ Getting started
 Prerequisites
 -------------
 
--   First, you need to be familar how to work into R. [Here](https://github.com/philipp-baumann/simplerspec-teaching/blob/master/00_R-basics-spectro.md) I give some recommendations to start mastering spectroscopy analysis taks.
+-   First, you need to be familar how to work into R. [Here](https://github.com/philipp-baumann/simplerspec-teaching/blob/master/00_R-basics-spectro.md) I give some recommendations to start mastering spectroscopy analysis tasks.
 -   You need to need to now that there are R basic data structures used for analysis. Have a first read [here](http://adv-r.had.co.nz/Data-structures.html) in the *Advanced R* book of Hadley Wickham.
 
 Topics and goals of this section

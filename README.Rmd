@@ -3,12 +3,9 @@ title: "Read, filter and transform spectra and metadata"
 author: "Philipp Baumann // philipp.baumann@usys.ethz.ch"
 date: "July 25, 2018"
 output:
-  pdf_document:
-    fig_caption: yes
-    number_sections: yes
+  github_document:
     toc: true
     toc_depth: 2
-    latex_engine: xelatex
   html_document:
     fig_caption: yes
     number_sections: yes
@@ -19,9 +16,12 @@ output:
     number_sections: yes
     toc: true
     toc_depth: 2
-  github_document:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
     toc: true
     toc_depth: 2
+    latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +30,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ---
 
-For a html version of this tutorial, see [**here**](). You can also download a pdf.
+For a html version of this tutorial, see [**here**](). You can also
+[download this tutorial as pdf]().
 
 # Getting started  
 
@@ -38,7 +39,7 @@ For a html version of this tutorial, see [**here**](). You can also download a p
 
 * First, you need to be familar how to work into R.
   [Here](https://github.com/philipp-baumann/simplerspec-teaching/blob/master/00_R-basics-spectro.md) 
-  I give some recommendations to start mastering spectroscopy analysis taks.
+  I give some recommendations to start mastering spectroscopy analysis tasks.
 * You need to need to now that there are R basic data structures used for 
   analysis. Have a first read [here](http://adv-r.had.co.nz/Data-structures.html)
   in the *Advanced R* book of Hadley Wickham. 
@@ -55,13 +56,13 @@ For a html version of this tutorial, see [**here**](). You can also download a p
 
 1. Use the `Clone or Download` button and clone/download this tutorial
 repository from github to your computer.
-2. Unzip the folder
+2. Unzip the folder.
 3. Double-click the `.RProj` file and the tutorial is loaded as R project
    (no need to use `setwd()` and `yourverylonganduniquedirectoryonyourpc` or
-   other nasty hard-coded approaches to set the working directory)
+   other nasty hard-coded approaches to set the working directory).
 4. For working with this R markdown notebooks for reproducible and interactive
-   analysis, see [here](https://rmarkdown.rstudio.com/index.html)
-5. Have fun reproducing
+   analysis, see [here](https://rmarkdown.rstudio.com/index.html).
+5. Have fun reproducing.
 
   
 ---
