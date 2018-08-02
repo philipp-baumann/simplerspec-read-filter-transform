@@ -3,14 +3,9 @@ title: "Read, filter and transform spectra and metadata"
 author: "Philipp Baumann // philipp.baumann@usys.ethz.ch"
 date: "July 25, 2018"
 output:
-  html_document:
-    df_print: paged
-  html_notebook:
-    fig_caption: yes
-    number_sections: yes
-  pdf_document:
-    fig_caption: yes
-    number_sections: yes
+  github_document:
+    toc: true
+    toc_depth: 2
 ---
 
 ```{r setup, include=FALSE}
@@ -21,10 +16,29 @@ knitr::opts_chunk$set(echo = TRUE)
 
 For a html version of this tutorial, see [**here**](). You can also download a pdf.
 
-# Topics and goals of this section
+# Getting started  
+
+Requirements prior starting this tutorial
+
+* I assume you are familiar with 
+
+## Topics and goals of this section
 
 * You will learn how to use different R base data structures and basic
   operations such as subsetting to explore and transform spectral data.
+  
+## How to interactively go throught the tutorial
+
+1. Use the `Clone or Download` button and clone/download this tutorial
+repository from github to your computer.
+2. Unzip the folder
+3. Double-click the `.RProj` file and the tutorial is loaded as R project
+   (no need to use `set.wd()` other other nasty hard-coded scripts to set
+   the working directory)
+4. For working with this R markdown notebooks for reproducible and interactive
+   analysis, see [here](https://rmarkdown.rstudio.com/index.html)
+5. Have fun reproducing
+
   
 ---
   
@@ -207,6 +221,304 @@ Simplerspec comes with reader function written in R, that is intended to be a
 universal Bruker OPUS file reader that extract spectra and key metadata from
 files. Usually, one is mostly interested to extract the final absorbance spectra
 (shown as `AB` in the *OPUS viewer* software).
+
+## Read the spectral data (OPUS files) as list into R
+
+```{r, message = FALSE, cache=TRUE}
+## Register parallel backend for using multiple cores
+
+# Allows to tune the models using parallel processing (e.g. use all available
+# cores of a CPU); caret package automatically detects the registered backend
+library("doParallel")
+# Make a cluster with all possible threads (more than physical cores)
+cl <- makeCluster(detectCores())
+# Register backend
+registerDoParallel(cl)
+# Return number of parallel workers
+getDoParWorkers() # 8 threads on MacBook Pro (Retina, 15-inch, Mid 2015);
+# Quadcore processor
+
+# Read spectra and metadata of all binary OPUS files into a list
+spc_list <- read_opus_univ(fnames = files, extract = c("spc"), parallel = TRUE)
+```
+
+## Use R functions to gain an overview of the spectral data
+
+The extracted spectra and metadata data are within a list. A list is a very
+flexible R data structure that can contain any other type of R objects. You can
+think of lists as containers that help to save and transform objects. Lists can
+contain hierarchically nested elements, e.g. a list can contain lists. In this
+case, the list contains the following elements:
+
+```{r}
+# Return the names of a list; names() returns a character vector
+# of the elemelement names and `[` extracts the first 10 names
+names(spc_list)[1:10]
+# The names from the spectral data list are identical to the
+# files that were read (file names without path of folder where data
+# are contained)
+files[1:10]
+```
+
+**List subsetting/extraction of components:** Lists can be subsetted similar to
+atomic vectors by the `[` and `[[` operators. The most important difference is
+that `[` returns a list (sub-list of list) and `[[` returns the content of a
+single component of the list (note that a single components can still contain
+sub-lists). Based on the `[` operator we can extract spectra and metadata from a
+single replicate measurement of a sample:
+
+```{r}
+# Display structure
+str(spc_list["BF_lo_01_soil_cal.0"])
+```
+
+The above code extracts a list with one element that is named
+`BF_lo_01_soil_cal.0`, whereas using `[[` shows the content of the subsetted
+list and the name is not shown anymore. The content contains again 9 elements,
+as `str()` reveals:
+
+```{r}
+str(spc_list[["BF_lo_01_soil_cal.0"]])
+```
+
+```{r}
+head(spc_list[["BF_lo_01_soil_cal.0"]][["wavenumbers"]])
+```
+
+
+Using the function `ls()` returns a vector of character strings giving the
+names of the list:
+
+```{r}
+# Show names of first hierarchy of list
+ls(spc_list[["BF_lo_01_soil_cal.0"]])
+```
+
+To extract nested elements from a list, you can repeatedly apply subsetting
+operators. Besides using name subsetting for named data structures that contain
+a name attribute you can also use integers as index or logical vectors (TRUE and
+FALSE).
+
+```{r}
+names(spc_list["BF_lo_01_soil_cal.0"]) # subset by name of first element
+# subset by integer index, result is identical
+names(spc_list[1]) == names(spc_list["BF_lo_01_soil_cal.0"])
+```
+
+For logical subsetting we create a new vector containing TRUE or FALSE that is
+of same length as the spectra list `spc_list`. Usually logical type vectors are
+returned when testing conditions using binary operators that allow the
+comparison of values in atomic vectors (see R help for *relational operators* by
+entering `?Comparision` in the R console; e.g. `<`, `>`, `==`). Here, we create
+a logical vector `logical_subset` manually in order to illustrate that
+subsetting also works with vectors of type logical:
+
+```{r}
+# repeat FALSE length(spc_list) times
+logical_subset <- rep(FALSE, length(spc_list))
+
+
+# Print subsetting vector
+logical_subset
+# Check type
+typeof(logical_subset)
+```
+
+Subsetting and assignment can be combined to replace the third
+element with `FALSE`:
+
+```{r}
+# Replace the 3rd element with TRUE; use subsetting and assignment
+logical_subset[3] <- TRUE
+```
+
+Subsequently, we can use the newly created logical vector for subsetting
+the spectral data list
+
+```{r}
+# Extract list with `[`; use str() to show a compact output that
+# is nicely printed
+str(spc_list[logical_subset]) # Returns positions that are TRUE, element 3
+```
+
+
+We can also test if the spectral list contains certain characters in the file
+name by using pattern matching functions. If one has used the string `"_tb_"` as
+part of the sample identifier to specify the sampling region in the file names,
+we might be interested in selecting only spectra and metadata of these region
+(`"_tb_"` stands for the site Tieningboué in Côte d'Ivoire for YAMSYS
+spectroscopy reference samples).
+
+```{r}
+# Samples from site abbreviation "tb" (Tieningboué)
+contains_tb <- grepl(pattern = "tb", x = names(spc_list))
+# Show names of spectral data list elements that are returned by
+# looking for "CI"
+names(spc_list[contains_tb])
+```
+
+As the above example illustrates, only spectral data from files
+containing the string `"tb"` are selected.
+
+
+## data.table data frames for storing spectral data
+
+Data frames are one of the basic R data structures.
+
+When first reading spectral data from binary OPUS files, simplerspec returns
+`̀data.tables`s of final spectra (`AB` block in OPUS viewer software).
+
+```{r}
+# Extract spectrum from file "BF_lo_01_soil_cal.0"
+# and get overview of the data structure
+str(spc_list[["BF_lo_01_soil_cal.0"]][["spc"]])
+```
+
+You can test if the above output has the class `data.frame` with
+
+```{r}
+is.data.frame(spc_list[["BF_lo_01_soil_cal.0"]][["spc"]])
+```
+
+As the output `TRUE` indicates, the selected spectrum from the list is a
+data frame.
+
+You can get the number of rows and columns of a data.table by
+
+```{r}
+# Assign data.table to object
+spc_dt <- spc_list[["BF_lo_01_soil_cal.0"]][["spc"]]
+nrow(spc_dt)
+ncol(spc_dt)
+```
+
+The spectral data.table within the file `"BF_lo_01_soil_cal.0"` has 
+`r nrow(spc_dt)` rows and `r ncol(spc_dt)` columns. The columns correspond to 
+wavenumber variables.
+
+Data frames have a `dimnames` attribute that names columns and
+rows:
+
+```{r}
+# Show row name and only first and last 10 column names
+rownames(spc_dt)
+idx_firstandlast10 <- c(1:10, seq(from = ncol(spc_dt) - 10, ncol(spc_dt), 1))
+colnames(spc_dt)[idx_firstandlast10]
+```
+
+You can also get dimension names in list form
+```{r}
+# Show row and column names as list
+str(dimnames(spc_dt))
+```
+
+**Subsetting data frames :** Data frame subsetting operations allow you to 
+extract parts of values stored within a data frame that you are interested in. 
+The basic syntax is that you can use `[` and supply a 1D index for both rows and
+columns, separated by a comma. Blank subsetting without an index value keeps all
+rows or columns:
+
+```{r}
+# Show columns 2, 3 and 6
+spc_dt[, c(2, 3, 6)]
+```
+
+The first index before the comma is the row index and the second the column
+index. Omitting the row index shows all rows. In the case of data.table `spc_dt`
+there is only one row. For exemplifying the subsetting behavior of matrices
+we can duplicate the data.table `spc_dt` and copy the same content into a second
+row using `rbind()`, which is a generic function to combine objects by rows
+(equivalent for columns is `cbind()`):
+
+
+```{r}
+spc_dt2 <- rbind(spc_dt, spc_dt)
+# Check dimensions
+dim(spc_dt2)
+```
+
+Now we can e.g. replace the first value in the second row by first selecting the
+value in the second row of the first column by 1 and then assigning the number 1
+to it. This will modify the value at the selection position in the previous
+data frame in place.
+
+```{r}
+spc_dt2[2, 1] # extract 2nd row and first column
+# Subset and modify by assignment
+spc_dt2[2, 1] <- 1
+# Check if value at selected position has been replaced
+spc_dt2[2, 1]
+```
+
+The above code shows that the selected value has been correctly replaced. It is
+also possible to only show the first row of `spc_dt2`, by leaving the column
+index empty:
+
+```{r}
+head(spc_dt[1, ]) # Show only first 10 values (default of head())
+```
+
+The first column of the first row has still the value `r spc_dt[1, 1]`.
+
+```{r}
+# Check if dimnames attribute is present
+str(attributes(spc_dt))
+```
+
+We can e.g. also select the first column by its name, which is commonly known in
+R as **name subsetting**
+
+```{r}
+spc_dt[, "3997.4"] # Select first column with wavenumber variable "3997.4"
+spc_dt[, "3997.4"] == spc_dt[, 1] # both are equivalent
+```
+
+
+## Advantages of lists
+
+**Applying the same function to all elements of a list:** Lists are data 
+structures that allow to store complex, hierarchical objects. Lists are
+fundamental units when applying functions on each elements using apply family
+functions. Apply family functions are a specific type of *functionals* that take
+functions and other objects as input and return lists or atomic vectors. Note
+that lists are also vectors. Functionals are an elegant way to solve common data
+manipulation tasks. A often used functional is `lapply()`. The functional
+`lapply(X, FUN, ...)` applies a function `FUN` to each of the corresponding
+elements of `X` and returns the result as a list of the same length as its input
+`X`. The argument `...` can be other arguments passed to the function.  Let us
+explore the behavior of `lapply()` on a simple example. A list shall contain
+three different the numeric vectors named `"a"`, `"b"`, and `"c"`.
+
+```{r}
+x <- list(
+  "a" = 1:10,
+  "b" = c(0.5, 2.3, 5),
+  "c" = seq(0.1, 1, 0.1)
+)
+x
+```
+
+We can simply calculate the mean value for all the elements (vectors) in the
+list `x` by using `lapply()`:
+
+```{r}
+lapply(x, mean) # First argument is X, second is FUN;
+# you can also supply arguments explicitly with lapply(X = x, FUN = mean)
+```
+
+As you can see, the mean value is computed for the elements `'a`, `'b'`, and
+`'c'` and returned as list.
+
+We can also remove the hierarchy from the list and returning it as named numeric
+vector using `unlist()`. `unlist()` concatenates all elements of all components
+into a single vector:
+
+```{r}
+mean_v <- unlist(lapply(x, mean))
+str(mean_v)
+```
+
+
 
 # Session info
 
