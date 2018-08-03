@@ -40,10 +40,10 @@ How to interactively go throught the tutorial
 ---------------------------------------------
 
 1.  Use the `Clone or Download` button and clone/download this tutorial repository from github to your computer.
-2.  Unzip the folder
-3.  Double-click the `.RProj` file and the tutorial is loaded as R project (no need to use `setwd()` and `yourverylonganduniquedirectoryonyourpc` or other nasty hard-coded approaches to set the working directory)
-4.  For working with this R markdown notebooks for reproducible and interactive analysis, see [here](https://rmarkdown.rstudio.com/index.html)
-5.  Have fun reproducing
+2.  Unzip the folder.
+3.  Double-click the `.RProj` file and the tutorial is loaded as R project (no need to use `setwd()` and `path = "yourverylonganduniquedirectoryonyourpc"` or other nasty hard-coded approaches to set the working directory, which makes your projects not reproducible for others; kindly follow these [instructions](http://r4ds.had.co.nz/workflow-projects.html#rstudio-projects) to learn how to work with RStudio self-contained projects.
+4.  For working with this R markdown notebooks for reproducible and interactive analysis, see [here](https://rmarkdown.rstudio.com/index.html).
+5.  Have fun reproducing.
 
 ------------------------------------------------------------------------
 

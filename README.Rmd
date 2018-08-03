@@ -3,12 +3,12 @@ title: "Read, filter and transform spectra and metadata"
 author: "Philipp Baumann // philipp.baumann@usys.ethz.ch"
 date: "July 25, 2018"
 output:
+  github_document:
+    toc: true
+    toc_depth: 2
   html_document:
     fig_caption: yes
     number_sections: yes
-    toc: true
-    toc_depth: 2
-  github_document:
     toc: true
     toc_depth: 2
   html_notebook:
@@ -58,8 +58,12 @@ For a html version of this tutorial, see [**here**](). You can also
 repository from github to your computer.
 2. Unzip the folder.
 3. Double-click the `.RProj` file and the tutorial is loaded as R project
-   (no need to use `setwd()` and `yourverylonganduniquedirectoryonyourpc` or
-   other nasty hard-coded approaches to set the working directory).
+   (no need to use `setwd()` and 
+   `path = "yourverylonganduniquedirectoryonyourpc"` or other nasty hard-coded
+   approaches to set the working directory, which makes your projects not 
+   reproducible for others; kindly follow these 
+   [instructions](http://r4ds.had.co.nz/workflow-projects.html#rstudio-projects)
+   to learn how to work with RStudio self-contained projects.
 4. For working with this R markdown notebooks for reproducible and interactive
    analysis, see [here](https://rmarkdown.rstudio.com/index.html).
 5. Have fun reproducing.
