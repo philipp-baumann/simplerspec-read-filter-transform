@@ -1,4 +1,4 @@
-Read, filter and transform spectra and metadata
+Read, filter and transform spectra and metadata using R data structures
 ================
 Philipp Baumann // <philipp.baumann@usys.ethz.ch>
 July 25, 2018
